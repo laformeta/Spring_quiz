@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.quiz.lesson04.mapper.SellerMapper">
+ 	<insert id="insertSeller" parameterType="Map">
+ 		INSERT INTO `seller`
+ 		(
+ 			`nickname`
+			, `profileImageUrl`
+			, `temperature`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{nickname}
+ 			, #{profileImageUrl}
+ 			, #{temperature}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectRecentSeller" resultType="com.quiz.lesson04.domain.Seller">
+ 		SELECT
+ 			`id`
+			, `nickname`
+			, `profileImageUrl`
+			, `temperature`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`seller`
+		ORDER BY `id` DESC
+ 		LIMIT 1
+ 	</select>
+ 	<!-- 3번 문제 -->
+ 	<select id="selectSellerById" parameterType="int" resultType="com.quiz.lesson04.domain.Seller">
+ 		SELECT
+ 			`id`
+			, `nickname`
+			, `profileImageUrl`
+			, `temperature`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`seller`
+		WHERE
+			`id` = #{id}
+ 	</select>
+ </mapper>
