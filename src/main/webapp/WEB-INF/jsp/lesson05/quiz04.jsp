@@ -36,14 +36,39 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${members}" var="">
+					<c:forEach items="${members}" var="eachmember" varStatus="status">
+					<c:set var="eachPhoneNumber" value="${eachmember.phoneNumber}"/>
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>${status.count}</td>
+						<td>${eachmember.name}</td>
+						<td>
+						<c:choose>
+							<c:when test="${fn:startsWith(eachPhoneNumber, '010')}">
+								${eachmember.phoneNumber}
+							</c:when>
+							<c:otherwise>
+								유효하지 않은 전화번호
+							</c:otherwise>
+						</c:choose>
+						</td>
+						<td>
+						<c:set var="nationality" value="${eachmember.nationality}"/>
+							${fn:replace(nationality, '시대 ', '-')}
+						</td>
+						<td>
+							<b>${fn:split(eachmember.email, '@')[0]}</b>@${fn:split(eachmember.email, '@')[1]}
+						</td>
+						<td>
+						<c:set var="introduce" value="${eachmember.introduce}" />
+						<c:choose>
+							<c:when test="${fn:length(introduce)<= 15}">
+								${eachmember.introduce}
+							</c:when>
+							<c:otherwise>
+								${fn:substring(introduce, 0, 15)}...
+							</c:otherwise>
+						</c:choose>
+						</td>
 					</tr>
 					</c:forEach>
 				</tbody>
