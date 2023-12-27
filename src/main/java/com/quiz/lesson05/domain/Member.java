@@ -1,4 +1,4 @@
-package com.quiz.lesson05;
+package com.quiz.lesson05.domain;
 
 public class Member {
 
@@ -38,6 +38,5 @@ public class Member {
 	public void setIntroduce(String introduce) {
 		this.introduce = introduce;
 	}
-	
 	
 }

@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.quiz.lesson05.domain.Member;
+
 @RequestMapping("/lesson05")
 @Controller
 public class Lesson05Controller {
