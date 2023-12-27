@@ -10,7 +10,9 @@ import com.quiz.weather_history.domain.WeatherHistory;
 @Repository
 public interface WeatherHistoryMapper {
 	
-	public List<Map<WeatherHistory>> selectWeatherHistory();
-		
+	public List<WeatherHistory> selectWeatherHistory();
 	
+	public void insertWeatherHistory(WeatherHistory weatherHistory);
+	
+	public WeatherHistory selectWeatherHistoryById(int id);
 }

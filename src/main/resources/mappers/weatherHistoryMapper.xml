@@ -3,19 +3,61 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper
-	namespace="com.quiz.weather_history.domain.WeatherHistory">
-	<select id="selectWeatherHistory" resultType="map">
+	namespace="com.quiz.weather_history.mapper.WeatherHistoryMapper">
+	<select id="selectWeatherHistory" resultType="com.quiz.weather_history.domain.WeatherHistory">
 		SELECT
 			`id`
-			, `date`
-			, `weather`
-			, `temperatures`
-			, `precipitation`
-			, `microDust`
-			, `windSpeed`
-			, `createdAt`
-			, `updatedAt`
+			,`date`
+			,`weather`
+			,`temperatures`
+			,`precipitation`
+			,`microDust`
+			,`windSpeed`
+			,`createdAt`
+			,`updatedAt`
 		FROM
 			`weather_history`
+	</select>
+	<insert id="insertWeatherHistory" parameterType="com.quiz.weather_history.domain.WeatherHistory"
+	useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO `weather_history`
+		(
+			`date`
+			,`weather`
+			,`temperatures`
+			,`precipitation`
+			,`microDust`
+			,`windSpeed`
+			,`createdAt`
+			,`updatedAt`
+		)
+		VALUES
+		(
+			#{date}
+			, #{weather}
+			, #{temperatures}
+			, #{precipitation}
+			, #{microDust}
+			, #{windSpeed}
+			, NOW()
+			, NOW()
+		)
+		
+	</insert>
+	<select id="selectWeatherHistoryById" resultType="com.quiz.weather_history.domain.WeatherHistory">
+		SELECT
+			`id`
+			,`date`
+			,`weather`
+			,`temperatures`
+			,`precipitation`
+			,`microDust`
+			,`windSpeed`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`weather_history`
+		WHERE
+			`id` = #{id}
 	</select>
 </mapper>
