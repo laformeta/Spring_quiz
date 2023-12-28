@@ -1,8 +1,9 @@
 package com.quiz.weather_history.mapper;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.quiz.weather_history.domain.WeatherHistory;
@@ -10,9 +11,14 @@ import com.quiz.weather_history.domain.WeatherHistory;
 @Repository
 public interface WeatherHistoryMapper {
 	
-	public List<WeatherHistory> selectWeatherHistory();
+	public List<WeatherHistory> selectWeatherHistoryList();
 	
-	public void insertWeatherHistory(WeatherHistory weatherHistory);
-	
-	public WeatherHistory selectWeatherHistoryById(int id);
+	public void insertWeatherHistory(
+			@Param("date") Date date, 
+			@Param("weather") String weather, 
+			@Param("temperatures") double temperatures, 
+			@Param("precipitation") double precipitation,
+			@Param("microDust") String microDust, 
+			@Param("windSpeed") double windSpeed);
+
 }

@@ -66,32 +66,31 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${weatherList}" var="weather">
+						<c:forEach items="${weatherList}" var="history">
 							<tr>
 								<td>
-									<fmt:formatDate value="${weather.date}" pattern="yyyy년 M월 d일" var="datePattern" />
-									${datePattern}
+									<fmt:formatDate value="${history.date}" pattern="yyyy년 M월 d일" />
 								</td>
 								<td>
 								<c:choose>
-									<c:when test="${weather.weather eq '비'}">
+									<c:when test="${history.weather eq '비'}">
 										<img alt="비" src="/img/rainy.jpg">
 									</c:when>
-									<c:when test="${weather.weather eq '흐림'}">
+									<c:when test="${history.weather eq '흐림'}">
 										<img alt="흐림" src="/img/cloudy.jpg">
 									</c:when>
-									<c:when test="${weather.weather eq '맑음'}">
+									<c:when test="${history.weather eq '맑음'}">
 										<img alt="맑음" src="/img/sunny.jpg">
 									</c:when>
-									<c:otherwise>
+									<c:when test="${history.weather eq '구름조금'}">
 										<img alt="구름조금" src="/img/partlyCloudy.jpg">
-									</c:otherwise>
+									</c:when>
 								</c:choose>
 								</td>
-								<td>${weather.temperatures}&#8451;</td>
-								<td>${weather.precipitation}mm</td>
-								<td>${weather.microDust}</td>
-								<td>${weather.windSpeed}km/h</td>
+								<td>${history.temperatures}&#8451;</td>
+								<td>${history.precipitation}mm</td>
+								<td>${history.microDust}</td>
+								<td>${history.windSpeed}km/h</td>
 							</tr>
 							</c:forEach>	
 					</tbody>

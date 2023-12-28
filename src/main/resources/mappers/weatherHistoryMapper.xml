@@ -4,7 +4,7 @@
 
 <mapper
 	namespace="com.quiz.weather_history.mapper.WeatherHistoryMapper">
-	<select id="selectWeatherHistory" resultType="com.quiz.weather_history.domain.WeatherHistory">
+	<select id="selectWeatherHistoryList" resultType="com.quiz.weather_history.domain.WeatherHistory">
 		SELECT
 			`id`
 			,`date`
@@ -18,8 +18,7 @@
 		FROM
 			`weather_history`
 	</select>
-	<insert id="insertWeatherHistory" parameterType="com.quiz.weather_history.domain.WeatherHistory"
-	useGeneratedKeys="true" keyProperty="id">
+	<insert id="insertWeatherHistory" parameterType="com.quiz.weather_history.domain.WeatherHistory">
 		INSERT INTO `weather_history`
 		(
 			`date`
@@ -44,20 +43,5 @@
 		)
 		
 	</insert>
-	<select id="selectWeatherHistoryById" resultType="com.quiz.weather_history.domain.WeatherHistory">
-		SELECT
-			`id`
-			,`date`
-			,`weather`
-			,`temperatures`
-			,`precipitation`
-			,`microDust`
-			,`windSpeed`
-			,`createdAt`
-			,`updatedAt`
-		FROM
-			`weather_history`
-		WHERE
-			`id` = #{id}
-	</select>
+
 </mapper>

@@ -17,21 +17,7 @@
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/weather_history/style.css">
-   <script>
-        $(function() {
-            // Datepicker 초기화
-            $("#datepicker").datepicker({
-                dateFormat: 'yy-mm-dd',
-                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-                monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                onSelect: function(dateText, inst) {
-                    // 선택된 날짜를 20XX-XX-XX 형태로 표시
-                    $("#formattedDate").text(dateText);
-                }
-            });
-        });
-    </script>
+   
 </head>
 <body>
 	<div id="wrap">
@@ -48,10 +34,10 @@
 				<%-- flex-column: 세로 메뉴 --%>
 				<ul class="nav flex-column mt-4">
 					<li class="nav-item">
-						<a href="/weather-history/weather-list-view" class="nav-link menu-font">날씨</a>
+						<a href="/weather_history/weather-list-view" class="nav-link menu-font">날씨</a>
 					</li>
 					<li class="nav-item">
-						<a href="/weather-history/add-weather-view" class="nav-link menu-font">날씨입력</a>
+						<a href="/weather_history/add-weather-view" class="nav-link menu-font">날씨입력</a>
 					</li>
 					<li class="nav-item">
 						<a href="#" class="nav-link menu-font">테마날씨</a>
@@ -141,5 +127,21 @@
 			</div>
 		</footer>
 	</div>
+	<script>
+        $(document).ready(function() {
+            // Datepicker 초기화
+            $("#datepicker").datepicker({
+                dateFormat: 'yy-mm-dd',
+                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+                monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                showMonthAfterYear: true ,
+                onSelect: function(dateText, inst) {
+                    // 선택된 날짜를 20XX-XX-XX 형태로 표시
+                    $("#formattedDate").text(dateText);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.quiz.weather_history.bo;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,15 +16,13 @@ public class WeatherHistoryBO {
 	@Autowired
 	private WeatherHistoryMapper weatherHistoryMapper;
 	
-	public List<WeatherHistory> getWeatherHistory() {
-		return weatherHistoryMapper.selectWeatherHistory();
+	public List<WeatherHistory> getWeatherHistoryList() {
+		return weatherHistoryMapper.selectWeatherHistoryList();
 	}
 	
-	public void addWeatherHistory(WeatherHistory weatherHistory) {
-		weatherHistoryMapper.insertWeatherHistory(weatherHistory);
+	public void addWeatherHistory(Date date, String weather, double temperatures, double precipitation,
+			String microDust, double windSpeed) {
+		weatherHistoryMapper.insertWeatherHistory(date, weather, temperatures, precipitation, microDust, windSpeed);
 	}
 	
-	public WeatherHistory getWeatherHistoryById(int id) {
-		return weatherHistoryMapper.selectWeatherHistoryById(id);
-	}
 }
