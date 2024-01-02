@@ -23,12 +23,12 @@
 	<div class="form-group p-3">
 		<h1>즐겨 찾기 추가하기</h1>
 			<div class="form-group">
-				<label for="bookmarkName">제목</label> 
-				<input type="text" class="form-control" id="bookmarkName">
+				<label for="name">제목</label> 
+				<input type="text" class="form-control" id="name">
 			</div>
 			<div class="form-group">
-				<label for="targetPageUrl">주소</label> 
-				<input type="text" class="form-control" id="targetPageUrl">
+				<label for="url">주소</label> 
+				<input type="text" class="form-control" id="url">
 			</div>
 			<button type="button" id="addBtn" class="btn btn-success form-control" value="추가">추가</button>
 	</div>
@@ -39,8 +39,8 @@
 // 				alert("연결 성공");
 				
 				// validation check
-				let bookmarkName = $("#bookmarkName").val();
-				if (!bookmarkName
+				let name = $("#name").val();
+				if (!name
 					// bookmarkName == ""
 					// bookmarkName.length < 1
 				) {
@@ -48,33 +48,34 @@
 					return;
 				}
 				
-				let targetPageUrl = $("#targetPageUrl").val();
-				if (targetPageUrl == "" ) {
+				let url = $("#url").val();
+				if (url == "" ) {
 					alert("즐겨 찾기 추가할 페이지 주소를 입력하세요");
 					
 					return;
 				}
-				if ((targetPageUrl.startsWith('http://') == false) && (targetPageUrl.startsWith('https://') == false)) {
+				if ((url.startsWith('http://') == false) && (url.startsWith('https://') == false)) {
 						alert("즐겨 찾기 추가할 페이지의 url이 잘못되었습니다. 다시 입력해주세요.");
 						return;
 				}
 				
-				console.log(bookmarkName);
-				console.log(targetPageUrl);
+				console.log(name);
+				console.log(url);
 				
 				// AJAX : 비동기로 서버에 요청
 				
 				$.ajax({
 					// request
 					type:'post'
-					, url:'/lesson06/quiz01/add-bookmark'
-					, data:{"bookmarkName":bookmarkName, "targetPageUrl":targetPageUrl}
+					, url:'/lesson06/add-bookmark'
+					, data:{"name":name, "url":url}
 				
 					// response
 					, success:function(data) { // call back 함수, data param : 응답값
-						alert(data); // 
-						if (data == "추가 완료") {
-							location.href = "/lesson06/quiz01/after-add-bookmark-view"; // GET 요청(화면 이동)
+						
+						if (data.code == 200) {
+							// 목록 화면으로 이동
+							location.href = "/lesson06/bookmark-list-view"; // get 방식 이동
 						}
 					}
 					, error:function(request, status, error) {

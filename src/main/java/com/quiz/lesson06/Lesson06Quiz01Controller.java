@@ -1,15 +1,22 @@
 package com.quiz.lesson06;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.quiz.lesson06.bo.BookmarkBO;
+import com.quiz.lesson06.domain.Bookmark;
 
-@RequestMapping("/lesson06/quiz01")
+@RequestMapping("/lesson06")
 @Controller
 public class Lesson06Quiz01Controller {
 	
@@ -17,7 +24,7 @@ public class Lesson06Quiz01Controller {
 	private BookmarkBO bookmarkBO;
 
 	// 즐겨찾기 추가 화면
-	// url : http://localhost/lesson06/quiz01/add-bookmark-view
+	// url : http://localhost/lesson06/add-bookmark-view
 	@GetMapping("/add-bookmark-view")
 	public String addBookmarkView() {
 		
@@ -26,20 +33,29 @@ public class Lesson06Quiz01Controller {
 	
 	// 회원가입 진행(insert) => AJAX 요청
 	// AJAX가 요청하는 응답값은 반드시 String이다.
-	
+	@ResponseBody
 	@PostMapping("/add-bookmark")
-	public String addBookmark(
+	public Map<String, Object> addBookmark(
 			@RequestParam("name") String name,
 			@RequestParam("url") String url) {
 		
 		bookmarkBO.addBookmark(name, url);
 		
-		return "추가 완료";
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "추가 완료");
+		
+		return result; // map => JSON String
 	}
 	
-	@GetMapping("/after-add-bookmark-view")
-	public String afterAddBookmarkView() {
+	@GetMapping("/bookmark-list-view")
+	public String bookmarkListView(Model model) {
+		// select db
+		List<Bookmark> bookmarkList = bookmarkBO.getBookmarkList();
 		
-		return "lesson06/afterAddBookmark";
+		// model에 담기
+		model.addAttribute("bookmarkList", bookmarkList);
+		
+		return "lesson06/bookmarkList";
 	}
 }
