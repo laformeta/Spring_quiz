@@ -21,4 +21,15 @@ public class BookmarkBO {
 	public List<Bookmark> getBookmarkList() {
 		return bookmarkMapper.selectBookmarkList();
 	}
+	
+	public boolean isDuplicationUrl(String url) {
+		
+		List<Bookmark> bookmarkList = bookmarkMapper.selectBookmarkListByUrl(url);
+//		return !bookmarkList.isEmpty();
+		return bookmarkList.isEmpty() ? false : true;
+	}
+	
+	public int deleteBookmarkById(int id) {
+		return bookmarkMapper.deleteBookmarkById(id);
+	}
 }
