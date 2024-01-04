@@ -17,4 +17,35 @@
 		FROM
 			`booking`
  	</select>
+ 	<delete id="deleteBookingById" parameterType="int">
+ 		DELETE
+ 		FROM 
+ 			`booking`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
+ 	<insert id="insertBooking">
+ 		INSERT INTO `booking`
+ 		(
+			`name`
+			, `headcount`
+			, `day`
+			, `date`
+			, `phoneNumber`
+			, `state`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{name}
+ 			, #{headcount}
+ 			, #{day}
+ 			, #{date}
+ 			, #{phoneNumber}
+ 			, '대기중'
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
  </mapper>
