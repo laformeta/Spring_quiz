@@ -81,6 +81,30 @@ public class BookingController {
 		return result;
 	}
 	
+	@GetMapping("/check-booking-view")
+	public String checkBookingView() {
+		return "booking/checkBooking";
+	}
 	
+	// 예약 확인
+	@ResponseBody
+	@PostMapping("/check-booking")
+	public Map<String, Object> checkBooking(
+			@RequestParam("name") String name,
+			@RequestParam("phoneNumber") String phoneNumber) {
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		Booking booking = bookingBO.getBookingListByNamePhoneNumber(name, phoneNumber);
+		if (booking == null) {
+			// {"code":500, "error_meddage":"예약내역이 존재하지 않습니다."
+			result.put("code", 500);
+			result.put("error_meddage", "예약내역이 존재하지 않습니다.");
+		} else {
+			result.put("code", 200);
+			result.put("result", booking);
+		}
+		return result;
+	}
 	
 }
