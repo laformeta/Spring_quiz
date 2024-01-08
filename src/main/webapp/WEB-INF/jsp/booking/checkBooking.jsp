@@ -108,6 +108,17 @@
 				}
 			});
 		});
+		// 배너
+		let bannerSrcArr = ['banner1.jpg', 'banner2.jpg', 'banner3.jpg', 'banner4.jpg'];
+        let currentIndex = 0;
+        setInterval(function() {
+            $('#bannerImage').attr('src', bannerSrcArr[currentIndex]);
+            currentIndex++;
+
+            if (currentIndex > bannerSrcArr.length) { // 인덱스 값이 배열의 크기를 넘으면 0으로(처음 이미지) 세팅
+                currentIndex = 0;
+            }
+        }, 3000); // 3초에 한번씩 함수 실행
 	});
 </script>
 </body>
